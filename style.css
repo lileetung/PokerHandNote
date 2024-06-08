@@ -1,68 +1,55 @@
-/* Reset some default styles */
-html,
-body,
-h1,
-h2,
-h3,
-p {
+html, body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
 }
 
-/* Set a background color for the whole page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
 }
 
-/* Define the main container's size using vh and vw units */
 .main-container {
     width: 80vw;
     height: auto;
     margin: 5vh auto;
-    /* Adjusted for better responsiveness */
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 1vh;
-    /* Using vh for border-radius */
     padding: 2vh;
-    /* Using vh for padding */
     box-shadow: 0 0 1vh rgba(0, 0, 0, 0.1);
-    /* Using vh for shadow */
+    min-height: calc(100vh - 40px);
+    position: relative;
+    padding-bottom: 40px;
 }
 
 h2 {
     font-size: 1.2em;
 }
 
-/* Style for the Blinds section */
-.blinds-info {
+.blinds-info, .hero-info, .section-opponents, .section-gameplay {
     margin-bottom: 2vh;
+}
+
+.input-blinds, .input-position, .input-card, .input-suit, .input-amount, .input-hero-stack {
+    padding: 0.5vh;
+    margin-right: 0.5vw;
 }
 
 .input-blinds {
     width: 15vw;
-    /* Adjusted for responsiveness */
-    margin-right: 0.5vw;
-    padding: 0.5vh;
 }
 
-/* Style for the Hero section */
-.hero-info {
-    margin-bottom: 2vh;
-}
-
-.input-position {
-    padding: 0.5vh;
+.input-position, .input-hero-stack {
     width: 16vw;
 }
 
-.input-card {
-    padding: 0.5vh;
-    width: 10vw;
-}
-
-.input-suit {
+.input-card, .input-suit {
     width: 10vw;
 }
 
@@ -70,73 +57,27 @@ h2 {
     width: 20vw;
 }
 
-.delete-action {
-    flex: 0;
-    width: auto;
-    margin-left: 1vw;
-    background: none;
-    border: none;
-    color: rgba(255, 0, 0, 0.647);
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.input-hero-stack {
-    padding: 0.5vh;
-    width: 15vw;
-}
-
-/* Style for the Gameplay section */
-.section-gameplay {
-    margin-bottom: 2vh;
-}
-
-/* Style for the stages (Preflop, Flop, Turn, River) */
-.stage {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 0.5vh;
-    padding: 1vh;
-    margin-bottom: 1vh;
-}
-
-/* Style for the buttons inside stages */
-.btn-add-action,
-.btn-add-opponent {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 10vh;
-    padding: 0.1vh 1vw;
-    cursor: pointer;
-    margin-top: 0.5vh;
-}
-
-/* Style for container-actions inside stages */
-.container-actions {
-    margin-top: 1vh;
-}
-
-/* Style for the Opponents section */
-.section-opponents {
-    margin-bottom: 2vh;
-}
-
-/* Style for container-opponents */
-.container-opponents {
-    margin-top: 1vh;
-}
-
-/* Style for the Output section */
 .section-output {
     text-align: center;
 }
 
-#output-text {
+footer {
+    background-color: #f8f8f8;
+    color: #333;
+    text-align: center;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#output-text, #flash-message {
     width: 95%;
-    height: 16vh;
-    margin-bottom: 1vh;
     padding: 1vh;
+    margin-bottom: 1vh;
+}
+
+#output-text {
+    height: 16vh;
     resize: none;
 }
 
@@ -150,8 +91,47 @@ h2 {
 }
 
 #flash-message {
-    color: #28a745;
     display: none;
-    margin-top: 1vh;
+    color: #28a745;
     font-size: 1.5em;
+    margin-top: 1vh;
+}
+
+.stage {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 0.5vh;
+    padding: 1vh;
+    margin-bottom: 1vh;
+}
+
+.btn-add-action, .btn-add-opponent {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10vh;
+    padding: 0.1vh 1vw;
+    cursor: pointer;
+    margin-top: 0.5vh;
+}
+
+.container-actions, .container-opponents {
+    margin-top: 1vh;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    flex-wrap: nowrap; 
+}
+
+.delete-action {
+    flex: 0 0 auto;
+    margin-left: 1vw;
+    background: none;
+    border: none;
+    color: rgba(255, 0, 0, 0.647);
+    font-weight: bold;
+    cursor: pointer;
 }
