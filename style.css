@@ -1,3 +1,4 @@
+/* 通用設定 */
 html, body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
@@ -12,30 +13,70 @@ html, body {
 body {
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* 主容器 */
 .main-container {
     width: 80vw;
-    height: auto;
     margin: 5vh auto;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 1vh;
     padding: 2vh;
     box-shadow: 0 0 1vh rgba(0, 0, 0, 0.1);
-    min-height: calc(100vh - 40px);
-    position: relative;
-    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 h2 {
     font-size: 1.2em;
 }
 
-.blinds-info, .hero-info, .section-opponents, .section-gameplay {
+/* 盲注資訊區 */
+.blinds-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     margin-bottom: 2vh;
 }
 
+.blinds-info input {
+    flex: 1;
+    margin-right: 0.5vw;
+}
+
+.blinds-info h2 {
+    width: 100%;
+}
+
+/* Hero 資訊區 */
+.hero-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2vh;
+}
+
+.hero-info select,
+.hero-info input {
+    flex: 1;
+    margin-right: 0.5vw;
+}
+
+.hero-info input.input-hero-stack {
+    flex: 2;
+    margin-right: 0; /* 確保對齊 */
+}
+
+.hero-info h2 {
+    width: 100%;
+}
+
+/* 公共輸入框樣式 */
 .input-blinds, .input-position, .input-card, .input-suit, .input-amount, .input-hero-stack {
     padding: 0.5vh;
     margin-right: 0.5vw;
@@ -57,17 +98,11 @@ h2 {
     width: 20vw;
 }
 
+/* 輸出區 */
 .section-output {
     text-align: center;
-}
-
-footer {
-    background-color: #f8f8f8;
-    color: #333;
-    text-align: center;
-    padding: 10px 20px;
-    width: 100%;
-    box-sizing: border-box;
+    margin-top: 2vh; /* 添加一些間距 */
+    padding-bottom: 2vh; /* 增加一些底部間距 */
 }
 
 #output-text, #flash-message {
@@ -97,6 +132,7 @@ footer {
     margin-top: 1vh;
 }
 
+/* 遊戲階段區 */
 .stage {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
@@ -105,6 +141,7 @@ footer {
     margin-bottom: 1vh;
 }
 
+/* 按鈕樣式 */
 .btn-add-action, .btn-add-opponent {
     background-color: #007bff;
     color: #fff;
@@ -115,6 +152,7 @@ footer {
     margin-top: 0.5vh;
 }
 
+/* 動作和對手容器 */
 .container-actions, .container-opponents {
     margin-top: 1vh;
 }
@@ -122,8 +160,8 @@ footer {
 .action {
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
-    flex-wrap: nowrap; 
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 }
 
 .delete-action {
@@ -134,4 +172,14 @@ footer {
     color: rgba(255, 0, 0, 0.647);
     font-weight: bold;
     cursor: pointer;
+}
+
+/* 底部區域 */
+footer {
+    background-color: #d8d8d8; /* 加深的背景顏色 */
+    color: #333;
+    text-align: center;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
