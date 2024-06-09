@@ -164,15 +164,33 @@ h2 {
     flex-wrap: nowrap;
 }
 
+/* delete 按鈕樣式 */
 .delete-action {
     flex: 0 0 auto;
     margin-left: 1vw;
-    background: none;
+    background-color: #ff4d4d;
     border: none;
-    color: rgba(255, 0, 0, 0.647);
+    color: #fff;
     font-weight: bold;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
 }
+
+.delete-action:hover {
+    background-color: #ff0000;
+}
+
+.delete-action:focus {
+    outline: none;
+    box-shadow: 0 0 0.5vh rgba(255, 0, 0, 0.5);
+}
+
 
 /* 底部區域 */
 footer {
