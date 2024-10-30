@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <option value="SB">SB</option>
                 <option value="BTN">BTN</option>
                 <option value="CO">CO</option>
-                <option value="LJ">LJ</option>
                 <option value="HJ">HJ</option>
+                <option value="LJ">LJ</option>
                 <option value="UTG1">UTG1</option>
                 <option value="UTG">UTG</option>
             </select>
@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <option value="SB">SB</option>
                 <option value="BTN">BTN</option>
                 <option value="CO">CO</option>
-                <option value="LJ">LJ</option>
                 <option value="HJ">HJ</option>
+                <option value="LJ">LJ</option>
                 <option value="UTG1">UTG1</option>
                 <option value="UTG">UTG</option>
             </select>
