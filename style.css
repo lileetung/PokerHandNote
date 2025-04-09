@@ -18,6 +18,45 @@ body {
     align-items: center;
 }
 
+/* 統一下拉選單中的預設選項顏色 */
+select option[value=""] {
+    color: #999;
+}
+
+/* 讓未選擇值的下拉選單顯示為灰色 */
+select:not([value]), select[value=""] {
+    color: #999;
+}
+
+select:focus {
+    color: #333;
+}
+
+/* 使用 JavaScript 添加的 placeholder-shown 類來控制顏色 */
+select.placeholder-shown {
+    color: #999;
+}
+
+select:not(.placeholder-shown) {
+    color: #333;
+}
+
+/* 讓花色選擇器的花色初始顯示為灰色 */
+.input-suit {
+    transition: color 0.2s ease;
+    color: #666;
+}
+
+.input-suit:focus,
+.input-suit:not(.placeholder-shown) {
+    color: #000;
+}
+
+/* 讓下拉選單中的花色保持原色 */
+.input-suit option {
+    color: #000 !important;
+}
+
 /* 主容器 */
 .main-container {
     width: 80vw;

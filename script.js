@@ -5,8 +5,20 @@ const PokerHandApp = (function() {
         DEBOUNCE_DELAY: 300,
         FLASH_MESSAGE_DURATION: 3000,
         CARD_RANKS: ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'],
-        POSITIONS: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'LJ', 'UTG1', 'UTG'],
+        POSITIONS_BY_COUNT: {
+            2: ['BB', 'SB'],
+            3: ['BB', 'SB', 'BTN'],
+            4: ['BB', 'SB', 'BTN', 'CO'],
+            5: ['BB', 'SB', 'BTN', 'CO', 'HJ'],
+            6: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'UTG'],
+            7: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'LJ', 'UTG'],
+            8: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'LJ', 'UTG+1', 'UTG'],
+            9: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'LJ', 'UTG+2', 'UTG+1', 'UTG'],
+            10: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'LJ', 'MP2', 'MP1', 'UTG+1', 'UTG'],
+        },
+        DEFAULT_POSITIONS: ['BB', 'SB', 'BTN', 'CO', 'HJ', 'LJ', 'UTG+2', 'UTG+1', 'UTG'],
         SUITS: {
+            '': '🤍', // 預設白色愛心
             '♠': '♠️',
             '♥': '♥️',
             '♦': '♦️',
@@ -27,6 +39,125 @@ const PokerHandApp = (function() {
         opponents: false
     };
     
+    // Current player count
+    let currentPlayerCount = 0;
+    
+    // Function to get positions based on player count
+    function getPositions() {
+        if (!currentPlayerCount || currentPlayerCount < 2) {
+            return CONFIG.DEFAULT_POSITIONS;
+        }
+        // Cap at 10 players
+        const count = Math.min(currentPlayerCount, 10);
+        return CONFIG.POSITIONS_BY_COUNT[count] || CONFIG.DEFAULT_POSITIONS;
+    }
+    
+    // Function to update all position dropdowns
+    function updateAllPositionDropdowns() {
+        // Get all position dropdowns
+        const allPositionDropdowns = document.querySelectorAll('.input-position');
+        
+        allPositionDropdowns.forEach(dropdown => {
+            // Save the current selected value
+            const currentValue = dropdown.value;
+            
+            // Clear all existing options
+            dropdown.innerHTML = '';
+            
+            // Add default option
+            let option = document.createElement('option');
+            option.value = '';
+            option.textContent = '位置';
+            dropdown.appendChild(option);
+            
+            // Add "我" (me) option
+            option = document.createElement('option');
+            option.value = '我';
+            option.textContent = '我';
+            dropdown.appendChild(option);
+            
+            // Add new position options
+            const positions = getPositions();
+            positions.forEach(position => {
+                option = document.createElement('option');
+                option.value = position;
+                option.textContent = position;
+                dropdown.appendChild(option);
+            });
+            
+            // Restore selected value if it still exists in the new options
+            if (currentValue) {
+                for (let i = 0; i < dropdown.options.length; i++) {
+                    if (dropdown.options[i].value === currentValue) {
+                        dropdown.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        });
+        
+        // Update select placeholder colors
+        updateSelectPlaceholderColors();
+    }
+    
+    // Function to update placeholder colors for select elements
+    function updateSelectPlaceholderColors() {
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            // Set initial color based on whether a value is selected
+            if (select.value === '') {
+                select.classList.add('placeholder-shown');
+            } else {
+                select.classList.remove('placeholder-shown');
+            }
+            
+            // Add change listener to update colors when selection changes
+            if (!select.hasEventListener) {
+                select.hasEventListener = true;
+                select.addEventListener('change', function() {
+                    if (this.value === '') {
+                        this.classList.add('placeholder-shown');
+                    } else {
+                        this.classList.remove('placeholder-shown');
+                    }
+                });
+            }
+        });
+        
+        // Special handling for suit selects which already have default values
+        const suitSelects = document.querySelectorAll('.input-suit');
+        suitSelects.forEach(suitSelect => {
+            // Initially mark all suit selects as placeholder-shown if they have default value
+            // This will apply the grayscale filter
+            suitSelect.classList.add('placeholder-shown');
+            
+            // Add focus and blur event handlers
+            if (!suitSelect.hasFocusListener) {
+                suitSelect.hasFocusListener = true;
+                
+                // When focused, temporarily remove the placeholder-shown class
+                suitSelect.addEventListener('focus', function() {
+                    this.classList.remove('placeholder-shown');
+                });
+                
+                // When clicked/changed, remove placeholder-shown permanently
+                suitSelect.addEventListener('change', function() {
+                    this.classList.remove('placeholder-shown');
+                    
+                    // Store that this suit has been actively selected
+                    this.dataset.userSelected = 'true';
+                });
+                
+                // When focus is lost, add placeholder-shown back only if not actively selected
+                suitSelect.addEventListener('blur', function() {
+                    if (this.dataset.userSelected !== 'true') {
+                        this.classList.add('placeholder-shown');
+                    }
+                });
+            }
+        });
+    }
+
     // Debounce function to limit function calls
     function debounce(func, delay) {
         let timer;
@@ -43,6 +174,7 @@ const PokerHandApp = (function() {
             flashMessage: document.getElementById('flash-message'),
             copyButton: document.getElementById('btn-copy'),
             blindsInputs: document.querySelectorAll(".blinds-info .input-blinds"),
+            playerCountInput: document.querySelector(".blinds-info .input-blinds[placeholder='本桌人數']"),
             heroPosition: document.querySelector('.hero-info .input-position'),
             heroStack: document.querySelector('.hero-info .input-hero-stack'),
             heroCards: document.querySelectorAll('.hero-info .input-card, .hero-info .input-suit'),
@@ -84,8 +216,9 @@ const PokerHandApp = (function() {
             option.textContent = '我';
             positionSelect.appendChild(option);
             
-            // Add position options
-            CONFIG.POSITIONS.forEach(position => {
+            // Add position options using the dynamic function
+            const positions = getPositions();
+            positions.forEach(position => {
                 option = document.createElement('option');
                 option.value = position;
                 option.textContent = position;
@@ -165,8 +298,15 @@ const PokerHandApp = (function() {
             option.textContent = '位置';
             positionSelect.appendChild(option);
             
-            // Add position options
-            CONFIG.POSITIONS.forEach(position => {
+            // Add "我" (me) option
+            option = document.createElement('option');
+            option.value = '我';
+            option.textContent = '我';
+            positionSelect.appendChild(option);
+            
+            // Add position options using the dynamic function
+            const positions = getPositions();
+            positions.forEach(position => {
                 option = document.createElement('option');
                 option.value = position;
                 option.textContent = position;
@@ -211,13 +351,23 @@ const PokerHandApp = (function() {
                 // Card suit select
                 const suitSelect = document.createElement('select');
                 suitSelect.className = 'input-suit';
+                suitSelect.classList.add('placeholder-shown'); // Add initially
+                
+                // Add default white heart option
+                let suitOption = document.createElement('option');
+                suitOption.value = '';
+                suitOption.textContent = '🤍';
+                suitOption.selected = true;
+                suitSelect.appendChild(suitOption);
                 
                 // Add suit options
                 Object.entries(CONFIG.SUITS).forEach(([suit, emoji]) => {
-                    option = document.createElement('option');
-                    option.value = suit;
-                    option.textContent = emoji;
-                    suitSelect.appendChild(option);
+                    if (suit !== '') { // Skip the empty value which we already added
+                        suitOption = document.createElement('option');
+                        suitOption.value = suit;
+                        suitOption.textContent = emoji;
+                        suitSelect.appendChild(suitOption);
+                    }
                 });
                 
                 // 將卡和花色添加到卡對中
@@ -391,7 +541,8 @@ const PokerHandApp = (function() {
                 const suitValue = inputElements[i + 1].value;
                 
                 if (cardValue) {
-                    const suitEmoji = CONFIG.SUITS[suitValue] || suitValue;
+                    // Use the white heart emoji for empty suit value, otherwise use the suit value
+                    const suitEmoji = suitValue === '' ? CONFIG.SUITS[''] : CONFIG.SUITS[suitValue] || suitValue;
                     cardString += cardValue + suitEmoji + ' ';
                 }
             }
@@ -585,6 +736,17 @@ const PokerHandApp = (function() {
             
             // Initialize FastClick to reduce touch delay on mobile
             Events.initFastClick();
+
+            // Event listener for player count input
+            if (DOM.playerCountInput) {
+                DOM.playerCountInput.addEventListener('input', function() {
+                    const playerCount = parseInt(this.value, 10);
+                    if (!isNaN(playerCount) && playerCount >= 2) {
+                        currentPlayerCount = playerCount;
+                        updateAllPositionDropdowns();
+                    }
+                });
+            }
         },
         
         // Initialize FastClick to improve mobile responsiveness
@@ -634,6 +796,24 @@ const PokerHandApp = (function() {
     function init() {
         cacheDOMElements();
         Events.init();
+        
+        // Initialize player count from input if available
+        if (DOM.playerCountInput && DOM.playerCountInput.value) {
+            const playerCount = parseInt(DOM.playerCountInput.value, 10);
+            if (!isNaN(playerCount) && playerCount >= 2) {
+                currentPlayerCount = playerCount;
+                updateAllPositionDropdowns();
+            }
+        }
+        
+        // Initialize placeholder colors for all select elements
+        updateSelectPlaceholderColors();
+        
+        // Reset the user selected state for all suit selects
+        document.querySelectorAll('.input-suit').forEach(suit => {
+            delete suit.dataset.userSelected;
+        });
+        
         updateOutput(); // Initial render
     }
     
