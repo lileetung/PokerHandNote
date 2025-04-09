@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <title>撲克手牌紀錄</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#f0f0f0">
 </head>
 
 <body>
@@ -14,73 +17,89 @@
         <!-- Section for Blinds -->
         <section class="blinds-info">
             <h2>Game Info</h2>
-            <input class="input-blinds" type="number" placeholder="玩家人數" />
-            <input class="input-blinds" type="number" placeholder="小盲" />
-            <input class="input-blinds" type="number" placeholder="大盲" />
-            <input class="input-blinds" type="number" placeholder="前注(Ante)" />
+            <div class="blinds-inputs-row">
+            <select class="input-blinds">
+                <option value="">賽制</option>
+                <option value="常規錦標賽">常規錦標賽</option>
+                <option value="限時錦標賽">限時錦標賽</option>
+                <option value="現金桌">現金桌</option>
+            </select>
+            <input class="input-blinds" type="number" placeholder="本桌人數" inputmode="numeric" />
+            </div>
+            <div class="blinds-inputs-row">
+                <input class="input-blinds" type="number" placeholder="小盲" inputmode="numeric" />
+                <input class="input-blinds" type="number" placeholder="大盲" inputmode="numeric" />
+                <input class="input-blinds" type="number" placeholder="前注" inputmode="numeric" />
+            </div>
         </section>
 
         <!-- Section for Hero -->
         <section class="hero-info">
             <h2>Hero</h2>
-            <select class="input-position">
-                <option value="">位置</option>
-                <option value="BB">BB</option>
-                <option value="SB">SB</option>
-                <option value="BTN">BTN</option>
-                <option value="CO">CO</option>
-                <option value="HJ">HJ</option>
-                <option value="LJ">LJ</option>
-                <option value="UTG1">UTG1</option>
-                <option value="UTG">UTG</option>
-            </select>
-            <select class="input-card">
-                <option value="">卡</option>
-                <option value="A">A</option>
-                <option value="K">K</option>
-                <option value="Q">Q</option>
-                <option value="J">J</option>
-                <option value="T">T</option>
-                <!-- Add options for 9 through 2 -->
-                <option value="9">9</option>
-                <option value="8">8</option>
-                <option value="7">7</option>
-                <option value="6">6</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-            </select>
-            <select class="input-suit">
-                <option value="♠">♠️</option>
-                <option value="♥">♥️</option>
-                <option value="♦">♦️</option>
-                <option value="♣">♣️</option>
-            </select>
-            <select class="input-card">
-                <option value="">卡</option>
-                <option value="A">A</option>
-                <option value="K">K</option>
-                <option value="Q">Q</option>
-                <option value="J">J</option>
-                <option value="T">T</option>
-                <!-- Add options for 9 through 2 -->
-                <option value="9">9</option>
-                <option value="8">8</option>
-                <option value="7">7</option>
-                <option value="6">6</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-            </select>
-            <select class="input-suit">
-                <option value="♠">♠️</option>
-                <option value="♥">♥️</option>
-                <option value="♦">♦️</option>
-                <option value="♣">♣️</option>
-            </select>
-            <input type="number" class="input-hero-stack" placeholder="籌碼量" />
+            <div class="hero-row">
+                <select class="input-position">
+                    <option value="">位置</option>
+                    <option value="BB">BB</option>
+                    <option value="SB">SB</option>
+                    <option value="BTN">BTN</option>
+                    <option value="CO">CO</option>
+                    <option value="HJ">HJ</option>
+                    <option value="LJ">LJ</option>
+                    <option value="UTG1">UTG1</option>
+                    <option value="UTG">UTG</option>
+                </select>
+                <input type="number" class="input-hero-stack" placeholder="籌碼量" inputmode="numeric" />
+            </div>
+            <div class="hero-cards">
+                <div class="card-pair">
+                    <select class="input-card">
+                        <option value="">卡</option>
+                        <option value="A">A</option>
+                        <option value="K">K</option>
+                        <option value="Q">Q</option>
+                        <option value="J">J</option>
+                        <option value="T">T</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                    </select>
+                    <select class="input-suit">
+                        <option value="♠">♠️</option>
+                        <option value="♥">♥️</option>
+                        <option value="♦">♦️</option>
+                        <option value="♣">♣️</option>
+                    </select>
+                </div>
+                <div class="card-pair">
+                    <select class="input-card">
+                        <option value="">卡</option>
+                        <option value="A">A</option>
+                        <option value="K">K</option>
+                        <option value="Q">Q</option>
+                        <option value="J">J</option>
+                        <option value="T">T</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                    </select>
+                    <select class="input-suit">
+                        <option value="♠">♠️</option>
+                        <option value="♥">♥️</option>
+                        <option value="♦">♦️</option>
+                        <option value="♣">♣️</option>
+                    </select>
+                </div>
+            </div>
         </section>
 
         <!-- Gameplay Section -->
@@ -90,7 +109,7 @@
                 <!-- Preflop Stage -->
                 <div class="stage preflop">
                     <h2>Preflop</h2>
-                    <button class="btn-add-action">+</button>
+                    <button class="btn-add-action" aria-label="Add Preflop Action">+</button>
                     <div class="container-actions"></div>
                 </div>
 
@@ -100,81 +119,84 @@
                     <div class="container-stage-header">
                         <div class="container-cards-input">
                             <!-- Add three card inputs for Flop -->
-                            <select class="input-card">
-                                <option value="">卡</option>
-                                <option value="A">A</option>
-                                <option value="K">K</option>
-                                <option value="Q">Q</option>
-                                <option value="J">J</option>
-                                <option value="T">T</option>
-                                <!-- Add options for 9 through 2 -->
-                                <option value="9">9</option>
-                                <option value="8">8</option>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                            </select>
-                            <select class="input-suit">
-                                <option value="">-</option>
-                                <option value="♠">♠️</option>
-                                <option value="♥">♥️</option>
-                                <option value="♦">♦️</option>
-                                <option value="♣">♣️</option>
-                            </select>
-                            <select class="input-card">
-                                <option value="">卡</option>
-                                <option value="A">A</option>
-                                <option value="K">K</option>
-                                <option value="Q">Q</option>
-                                <option value="J">J</option>
-                                <option value="T">T</option>
-                                <!-- Add options for 9 through 2 -->
-                                <option value="9">9</option>
-                                <option value="8">8</option>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                            </select>
-                            <select class="input-suit">
-                                <option value="">-</option>
-                                <option value="♠">♠️</option>
-                                <option value="♥">♥️</option>
-                                <option value="♦">♦️</option>
-                                <option value="♣">♣️</option>
-                            </select>
-                            <select class="input-card">
-                                <option value="">卡</option>
-                                <option value="A">A</option>
-                                <option value="K">K</option>
-                                <option value="Q">Q</option>
-                                <option value="J">J</option>
-                                <option value="T">T</option>
-                                <!-- Add options for 9 through 2 -->
-                                <option value="9">9</option>
-                                <option value="8">8</option>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                            </select>
-                            <select class="input-suit">
-                                <option value="">-</option>
-                                <option value="♠">♠️</option>
-                                <option value="♥">♥️</option>
-                                <option value="♦">♦️</option>
-                                <option value="♣">♣️</option>
-                            </select>
+                            <div class="card-pair">
+                                <select class="input-card">
+                                    <option value="">卡</option>
+                                    <option value="A">A</option>
+                                    <option value="K">K</option>
+                                    <option value="Q">Q</option>
+                                    <option value="J">J</option>
+                                    <option value="T">T</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <select class="input-suit">
+                                    <option value="">-</option>
+                                    <option value="♠">♠️</option>
+                                    <option value="♥">♥️</option>
+                                    <option value="♦">♦️</option>
+                                    <option value="♣">♣️</option>
+                                </select>
+                            </div>
+                            <div class="card-pair">
+                                <select class="input-card">
+                                    <option value="">卡</option>
+                                    <option value="A">A</option>
+                                    <option value="K">K</option>
+                                    <option value="Q">Q</option>
+                                    <option value="J">J</option>
+                                    <option value="T">T</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <select class="input-suit">
+                                    <option value="">-</option>
+                                    <option value="♠">♠️</option>
+                                    <option value="♥">♥️</option>
+                                    <option value="♦">♦️</option>
+                                    <option value="♣">♣️</option>
+                                </select>
+                            </div>
+                            <div class="card-pair">
+                                <select class="input-card">
+                                    <option value="">卡</option>
+                                    <option value="A">A</option>
+                                    <option value="K">K</option>
+                                    <option value="Q">Q</option>
+                                    <option value="J">J</option>
+                                    <option value="T">T</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <select class="input-suit">
+                                    <option value="">-</option>
+                                    <option value="♠">♠️</option>
+                                    <option value="♥">♥️</option>
+                                    <option value="♦">♦️</option>
+                                    <option value="♣">♣️</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-add-action">+</button>
+                    <button class="btn-add-action" aria-label="Add Flop Action">+</button>
                     <div class="container-actions"></div>
                 </div>
 
@@ -183,34 +205,35 @@
                     <h2>Turn</h2>
                     <div class="container-stage-header">
                         <div class="container-cards-input">
-                            <!-- Add three card inputs for Flop -->
-                            <select class="input-card">
-                                <option value="">卡</option>
-                                <option value="A">A</option>
-                                <option value="K">K</option>
-                                <option value="Q">Q</option>
-                                <option value="J">J</option>
-                                <option value="T">T</option>
-                                <!-- Add options for 9 through 2 -->
-                                <option value="9">9</option>
-                                <option value="8">8</option>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                            </select>
-                            <select class="input-suit">
-                                <option value="">-</option>
-                                <option value="♠">♠️</option>
-                                <option value="♥">♥️</option>
-                                <option value="♦">♦️</option>
-                                <option value="♣">♣️</option>
-                            </select>
+                            <!-- Add card input for Turn -->
+                            <div class="card-pair">
+                                <select class="input-card">
+                                    <option value="">卡</option>
+                                    <option value="A">A</option>
+                                    <option value="K">K</option>
+                                    <option value="Q">Q</option>
+                                    <option value="J">J</option>
+                                    <option value="T">T</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <select class="input-suit">
+                                    <option value="">-</option>
+                                    <option value="♠">♠️</option>
+                                    <option value="♥">♥️</option>
+                                    <option value="♦">♦️</option>
+                                    <option value="♣">♣️</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-add-action">+</button>
+                    <button class="btn-add-action" aria-label="Add Turn Action">+</button>
                     <div class="container-actions"></div>
                 </div>
 
@@ -219,34 +242,35 @@
                     <h2>River</h2>
                     <div class="container-stage-header">
                         <div class="container-cards-input">
-                            <!-- Add three card inputs for Flop -->
-                            <select class="input-card">
-                                <option value="">卡</option>
-                                <option value="A">A</option>
-                                <option value="K">K</option>
-                                <option value="Q">Q</option>
-                                <option value="J">J</option>
-                                <option value="T">T</option>
-                                <!-- Add options for 9 through 2 -->
-                                <option value="9">9</option>
-                                <option value="8">8</option>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                            </select>
-                            <select class="input-suit">
-                                <option value="">-</option>
-                                <option value="♠">♠️</option>
-                                <option value="♥">♥️</option>
-                                <option value="♦">♦️</option>
-                                <option value="♣">♣️</option>
-                            </select>
+                            <!-- Add card input for River -->
+                            <div class="card-pair">
+                                <select class="input-card">
+                                    <option value="">卡</option>
+                                    <option value="A">A</option>
+                                    <option value="K">K</option>
+                                    <option value="Q">Q</option>
+                                    <option value="J">J</option>
+                                    <option value="T">T</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <select class="input-suit">
+                                    <option value="">-</option>
+                                    <option value="♠">♠️</option>
+                                    <option value="♥">♥️</option>
+                                    <option value="♦">♦️</option>
+                                    <option value="♣">♣️</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-add-action">+</button>
+                    <button class="btn-add-action" aria-label="Add River Action">+</button>
                     <div class="container-actions"></div>
                 </div>
             </div>
@@ -255,7 +279,7 @@
         <!-- Opponents Section -->
         <section class="section-opponents">
             <h2>Opponents</h2>
-            <button class="btn-add-opponent">+</button>
+            <button class="btn-add-opponent" aria-label="Add Opponent">+</button>
             <div class="container-opponents"></div>
         </section>
 
