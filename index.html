@@ -1,299 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
-    <title>撲克手牌紀錄</title>
+    <title>感謝您的支持！</title>
+    <meta name="description" content="感謝您一直以來的支持！我們已經將功能完整移植至 iOS 應用程式，提供更好的使用體驗">
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#f0f0f0">
+    <meta name="theme-color" content="#E4A334">
+
+    <!-- iOS App Store meta tags for better integration -->
+    <meta name="apple-itunes-app" content="app-id=6751341908">
+    <link rel="apple-touch-icon" href="logo_rm_bg.svg">
 </head>
 
 <body>
-    <div class="main-container">
-
-        <!-- Section for Blinds -->
-        <section class="blinds-info">
-            <h2>Game Info</h2>
-            <div class="blinds-inputs-row">
-            <select class="input-blinds">
-                <option value="">賽制</option>
-                <option value="常規錦標賽">常規錦標賽</option>
-                <option value="限時錦標賽">限時錦標賽</option>
-                <option value="現金桌">現金桌</option>
-            </select>
-            <input class="input-blinds" type="number" placeholder="本桌人數" inputmode="numeric" />
+    <div class="redirect-container">
+        <div class="redirect-content">
+            <div class="message-section">
+                <h2 class="thank-you-title">感謝您的支持！</h2>
+                <p class="thank-you-message">
+                    感謝您一直以來使用我們的撲克手牌紀錄工具。<br>經眾多牌友的強烈敲碗，終於推出了 PokerAlpha App。
+                </p>
+                <p class="app-benefits">
+                    <strong>PokerAlpha App 特色：</strong><br>
+                    • 更直觀的操作介面<br>
+                    • 個人牌局資料庫<br>
+                    • 圖片與文字牌譜輸出<br>
+                    • 撲克 AI 分析牌局
+                </p>
             </div>
-            <div class="blinds-inputs-row">
-                <input class="input-blinds" type="number" placeholder="小盲" inputmode="numeric" />
-                <input class="input-blinds" type="number" placeholder="大盲" inputmode="numeric" />
-                <input class="input-blinds" type="number" placeholder="前注" inputmode="numeric" />
-            </div>
-        </section>
 
-        <!-- Section for Hero -->
-        <section class="hero-info">
-            <h2>Hero</h2>
-            <div class="hero-row">
-                <select class="input-position">
-                    <option value="">位置</option>
-                </select>
-                <input type="number" class="input-hero-stack" placeholder="籌碼量" inputmode="numeric" />
-            </div>
-            <div class="hero-cards">
-                <div class="card-pair">
-                    <select class="input-card">
-                        <option value="">卡</option>
-                        <option value="A">A</option>
-                        <option value="K">K</option>
-                        <option value="Q">Q</option>
-                        <option value="J">J</option>
-                        <option value="T">T</option>
-                        <option value="9">9</option>
-                        <option value="8">8</option>
-                        <option value="7">7</option>
-                        <option value="6">6</option>
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                    </select>
-                    <select class="input-suit placeholder-shown">
-                        <option value="" selected>🤍</option>
-                        <option value="♠">♠️</option>
-                        <option value="♥">♥️</option>
-                        <option value="♦">♦️</option>
-                        <option value="♣">♣️</option>
-                    </select>
-                </div>
-                <div class="card-pair">
-                    <select class="input-card">
-                        <option value="">卡</option>
-                        <option value="A">A</option>
-                        <option value="K">K</option>
-                        <option value="Q">Q</option>
-                        <option value="J">J</option>
-                        <option value="T">T</option>
-                        <option value="9">9</option>
-                        <option value="8">8</option>
-                        <option value="7">7</option>
-                        <option value="6">6</option>
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                    </select>
-                    <select class="input-suit placeholder-shown">
-                        <option value="" selected>🤍</option>
-                        <option value="♠">♠️</option>
-                        <option value="♥">♥️</option>
-                        <option value="♦">♦️</option>
-                        <option value="♣">♣️</option>
-                    </select>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gameplay Section -->
-        <section class="section-gameplay">
-            <div class="gameplay-stages">
-
-                <!-- Preflop Stage -->
-                <div class="stage preflop">
-                    <h2>Preflop</h2>
-                    <button class="btn-add-action" aria-label="Add Preflop Action">+</button>
-                    <div class="container-actions"></div>
-                </div>
-
-                <!-- Flop Stage -->
-                <div class="stage flop">
-                    <h2>Flop</h2>
-                    <div class="container-stage-header">
-                        <div class="container-cards-input">
-                            <!-- Add three card inputs for Flop -->
-                            <div class="card-pair">
-                                <select class="input-card">
-                                    <option value="">卡</option>
-                                    <option value="A">A</option>
-                                    <option value="K">K</option>
-                                    <option value="Q">Q</option>
-                                    <option value="J">J</option>
-                                    <option value="T">T</option>
-                                    <option value="9">9</option>
-                                    <option value="8">8</option>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                </select>
-                                <select class="input-suit placeholder-shown">
-                                    <option value="" selected>🤍</option>
-                                    <option value="♠">♠️</option>
-                                    <option value="♥">♥️</option>
-                                    <option value="♦">♦️</option>
-                                    <option value="♣">♣️</option>
-                                </select>
-                            </div>
-                            <div class="card-pair">
-                                <select class="input-card">
-                                    <option value="">卡</option>
-                                    <option value="A">A</option>
-                                    <option value="K">K</option>
-                                    <option value="Q">Q</option>
-                                    <option value="J">J</option>
-                                    <option value="T">T</option>
-                                    <option value="9">9</option>
-                                    <option value="8">8</option>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                </select>
-                                <select class="input-suit placeholder-shown">
-                                    <option value="" selected>🤍</option>
-                                    <option value="♠">♠️</option>
-                                    <option value="♥">♥️</option>
-                                    <option value="♦">♦️</option>
-                                    <option value="♣">♣️</option>
-                                </select>
-                            </div>
-                            <div class="card-pair">
-                                <select class="input-card">
-                                    <option value="">卡</option>
-                                    <option value="A">A</option>
-                                    <option value="K">K</option>
-                                    <option value="Q">Q</option>
-                                    <option value="J">J</option>
-                                    <option value="T">T</option>
-                                    <option value="9">9</option>
-                                    <option value="8">8</option>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                </select>
-                                <select class="input-suit placeholder-shown">
-                                    <option value="" selected>🤍</option>
-                                    <option value="♠">♠️</option>
-                                    <option value="♥">♥️</option>
-                                    <option value="♦">♦️</option>
-                                    <option value="♣">♣️</option>
-                                </select>
-                            </div>
-                        </div>
+            <div class="action-section">
+                <a href="https://apps.apple.com/tw/app/pokeralpha/id6751341908"
+                   class="app-store-button"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <img src="logo_rm_bg.svg" alt="PokerAlpha Logo" class="button-logo">
+                    <div class="button-content">
+                        <span class="button-text">前往 App Store 下載</span>
+                        <span class="button-subtitle">立即體驗完整功能</span>
                     </div>
-                    <button class="btn-add-action" aria-label="Add Flop Action">+</button>
-                    <div class="container-actions"></div>
-                </div>
+                </a>
 
-                <!-- Turn Stage -->
-                <div class="stage turn">
-                    <h2>Turn</h2>
-                    <div class="container-stage-header">
-                        <div class="container-cards-input">
-                            <!-- Add card input for Turn -->
-                            <div class="card-pair">
-                                <select class="input-card">
-                                    <option value="">卡</option>
-                                    <option value="A">A</option>
-                                    <option value="K">K</option>
-                                    <option value="Q">Q</option>
-                                    <option value="J">J</option>
-                                    <option value="T">T</option>
-                                    <option value="9">9</option>
-                                    <option value="8">8</option>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                </select>
-                                <select class="input-suit placeholder-shown">
-                                    <option value="" selected>🤍</option>
-                                    <option value="♠">♠️</option>
-                                    <option value="♥">♥️</option>
-                                    <option value="♦">♦️</option>
-                                    <option value="♣">♣️</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn-add-action" aria-label="Add Turn Action">+</button>
-                    <div class="container-actions"></div>
-                </div>
+                <p class="additional-info">
+                    Android 版本即將推出，敬請期待！
+                </p>
+            </div>
 
-                <!-- River Stage -->
-                <div class="stage river">
-                    <h2>River</h2>
-                    <div class="container-stage-header">
-                        <div class="container-cards-input">
-                            <!-- Add card input for River -->
-                            <div class="card-pair">
-                                <select class="input-card">
-                                    <option value="">卡</option>
-                                    <option value="A">A</option>
-                                    <option value="K">K</option>
-                                    <option value="Q">Q</option>
-                                    <option value="J">J</option>
-                                    <option value="T">T</option>
-                                    <option value="9">9</option>
-                                    <option value="8">8</option>
-                                    <option value="7">7</option>
-                                    <option value="6">6</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                </select>
-                                <select class="input-suit placeholder-shown">
-                                    <option value="" selected>🤍</option>
-                                    <option value="♠">♠️</option>
-                                    <option value="♥">♥️</option>
-                                    <option value="♦">♦️</option>
-                                    <option value="♣">♣️</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn-add-action" aria-label="Add River Action">+</button>
-                    <div class="container-actions"></div>
+            <div class="developer-info">
+                <p>
+                    如果您有任何問題或建議，歡迎透過以下方式聯繫：<br>
+                    <a href="https://www.instagram.com/raviiiiiiiiiii/" target="_blank" rel="noopener noreferrer">
+                        Instagram: @raviiiiiiiiiii
+                    </a>
+                </p>
                 </div>
             </div>
-        </section>
-
-        <!-- Opponents Section -->
-        <section class="section-opponents">
-            <h2>Opponents</h2>
-            <button class="btn-add-opponent" aria-label="Add Opponent">+</button>
-            <div class="container-opponents"></div>
-        </section>
-
-        <!-- Output Section -->
-        <section class="section-output">
-            <textarea id="output-text" readonly></textarea>
-            <button id="btn-copy">COPY</button>
-            <div id="flash-message" class="flash-message">OK!</div>
-        </section>
     </div>
 
-    <footer>
-        <div class="footer-bottom">
-            <p>歡迎分享給喜歡撲克的朋友們</p>
-            <p>Developed by 小李 | 樂意收到大家的反饋 <a href="https://www.instagram.com/raviiiiiiiiiii/" target="_blank">Instagram</a></p>
-        </div>
-    </footer>
+    <!-- Optional: Add some basic analytics or tracking if needed -->
+    <script>
+        // Optional: Track page visits for analytics
+        console.log('PokerAlpha redirect page with button logo loaded');
 
-    <script src="script.js"></script>
-
+        // Optional: Add click tracking for the App Store button
+        document.addEventListener('DOMContentLoaded', function() {
+            const appStoreButton = document.querySelector('.app-store-button');
+            if (appStoreButton) {
+                appStoreButton.addEventListener('click', function() {
+                    console.log('User clicked App Store link');
+                    // You could add analytics tracking here if needed
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

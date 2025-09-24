@@ -1,1126 +1,306 @@
-/* 通用設定 */
-html, body, h1, h2, h3, p {
+/* Reset and base styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #252525;
+    min-height: 100vh;
 }
 
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* 統一下拉選單中的預設選項顏色 */
-select option[value=""] {
-    color: #999;
-}
-
-/* 讓未選擇值的下拉選單顯示為灰色 */
-select:not([value]), select[value=""] {
-    color: #999;
-}
-
-select:focus {
-    color: #333;
-}
-
-/* 使用 JavaScript 添加的 placeholder-shown 類來控制顏色 */
-select.placeholder-shown {
-    color: #999;
-}
-
-select:not(.placeholder-shown) {
-    color: #333;
-}
-
-/* 讓花色選擇器的花色初始顯示為灰色 */
-.input-suit {
-    transition: color 0.2s ease;
-    color: #666;
-}
-
-.input-suit:focus,
-.input-suit:not(.placeholder-shown) {
-    color: #000;
-}
-
-/* 讓下拉選單中的花色保持原色 */
-.input-suit option {
-    color: #000 !important;
-}
-
-/* 主容器 */
-.main-container {
-    width: 80vw;
-    max-width: 800px;
-    margin: 5vh auto;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 1vh;
-    padding: 2vh;
-    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-h2 {
-    font-size: 1.2em;
-    margin-bottom: 1vh;
-}
-
-/* 盲注資訊區 */
-.blinds-info {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 2vh;
-    gap: 1vh;
-}
-
-.blinds-info input {
-    flex: 1;
-    min-width: 0;
-}
-
-.blinds-info h2 {
-    width: 100%;
-}
-
-.blinds-info select.input-blinds {
-    width: 100%;
-    margin-bottom: 1vh;
-    box-sizing: border-box;
-    display: block;
-}
-
-.blinds-inputs-row {
-    display: flex;
-    width: 100%;
-    gap: 1vh;
-}
-
-.blinds-inputs-row .input-blinds {
-    flex: 1;
-    min-width: 0;
-    width: calc(25% - 0.75vh);
-}
-
-/* Hero 資訊區 */
-.hero-info {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2vh;
-    gap: 1vh;
-}
-
-.hero-info h2 {
-    width: 100%;
-}
-
-.hero-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.hero-row .input-position {
-    flex: 0.35;
-    min-width: 100px;
-}
-
-.hero-row .input-hero-stack {
-    flex: 0.65;
-    min-width: 150px;
-}
-
-.hero-cards {
-    display: flex;
-    justify-content: flex-start;
-    gap: 2px;
-    padding: 0;
-}
-
-/* 統一表單元素樣式 */
-input, select, button {
-    height: 44px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    padding: 0 12px;
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-/* 特定寬度設定 */
-.input-blinds {
-    width: calc(25% - 0.75vh);
-}
-
-.input-position {
-    width: 80px;
-}
-
-/* 隱藏下拉箭頭 */
-.input-card, .input-suit {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: none;
-    width: auto;
-    min-width: 60px;
-    text-align: center;
-    padding: 0 8px;
-    overflow: visible;
-}
-
-/* IE10+ 特定樣式 */
-.input-card::-ms-expand, .input-suit::-ms-expand {
-    display: none;
-}
-
-.input-action {
-    width: 80px;
-}
-
-.input-amount {
-    width: 100px;
-}
-
-.input-hero-stack {
-    width: 100px;
-}
-
-/* 遊戲階段區 */
-.stage {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.5vh;
-    margin-bottom: 2vh;
-    position: relative;
-    clear: both;
-}
-
-.stage h2 {
-    display: inline-block;
-    margin-right: 15px;
-    font-weight: bold;
-    color: #333;
-}
-
-.stage:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* 動作和對手容器 */
-.container-actions, .container-opponents {
-    margin-top: 2vh;
-    clear: both;
-}
-
-.action {
-    display: flex;
-    flex-wrap: nowrap !important;
-    align-items: center;
-    padding: 12px 48px 12px 12px;
-    margin-bottom: 12px;
-    gap: 10px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    transition: all 0.2s ease;
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* 優化位置和動作選擇器的寬度 */
-.action .input-position,
-.action .input-action {
-    flex: 0 0 auto;
-    width: auto;
-    min-width: 90px;
-    max-width: 120px;
-}
-
-/* 金錢輸入框自適應剩餘空間 */
-.action .input-amount {
-    flex: 1;
-    min-width: 50px;
-}
-
-/* 刪除按鈕固定在右側，不影響整體佈局 */
-.action .delete-action {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* 確保在較窄屏幕上仍然保持在同一行 */
-@media only screen and (max-width: 430px) {
-    .action .input-position,
-    .action .input-action {
-        min-width: 80px;
-    }
-    
-    .action {
-        padding-right: 40px;
-    }
-}
-
-/* 更窄屏幕上的進一步優化 */
-@media only screen and (max-width: 375px) {
-    .action .input-position,
-    .action .input-action {
-        min-width: 70px;
-        font-size: 14px;
-    }
-    
-    .action .input-amount {
-        min-width: 40px;
-        font-size: 14px;
-    }
-    
-    .action {
-        gap: 5px;
-        padding: 10px 38px 10px 10px;
-    }
-}
-
-/* 輸出區 */
-.section-output {
-    position: relative;
-    text-align: center;
-    margin-top: 2vh;
-    padding-bottom: 2vh;
-}
-
-#output-text, #flash-message {
-    width: 95%;
-    padding: 1vh;
-    margin-bottom: 1vh;
-}
-
-#output-text {
-    height: 16vh;
-    resize: none;
-    font-family: monospace;
-    font-size: 16px;
-}
-
-/* 輸出文本區域快照動畫效果 */
-@keyframes outputFlash {
-    0% { box-shadow: 0 0 0 2px rgba(76, 217, 100, 0); }
-    20% { box-shadow: 0 0 0 2px rgba(76, 217, 100, 1); }
-    100% { box-shadow: 0 0 0 2px rgba(76, 217, 100, 0); }
-}
-
-.output-flash {
-    animation: outputFlash 0.8s ease-out;
-}
-
-/* 全新的覆蓋提示訊息樣式 */
-#flash-message {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(76, 217, 100, 0.9);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    pointer-events: none;
-}
-
-/* 提示訊息顯示動畫 */
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: translate(-50%, -30%); }
-    15% { opacity: 1; transform: translate(-50%, -50%); }
-    85% { opacity: 1; transform: translate(-50%, -50%); }
-    100% { opacity: 0; transform: translate(-50%, -70%); }
-}
-
-.flash-animation {
-    animation: fadeInOut 1.2s ease;
-}
-
-/* 按鈕樣式 */
-.btn-add-action, .btn-add-opponent {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-    padding: 0;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 1vh;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    float: right;
-    margin-right: 10px;
-}
-
-.btn-add-action:hover, .btn-add-opponent:hover {
-    background-color: #0069d9;
-    transform: scale(1.05);
-    transition: transform 0.2s ease;
-}
-
-/* 複製按鈕的現代化樣式 */
-#btn-copy {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 32px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(66, 133, 244, 0.25);
-    margin-top: 15px;
-    min-width: 120px;
-    text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
-}
-
-#btn-copy:hover {
-    background-color: #2b76f5;
-    box-shadow: 0 6px 8px rgba(66, 133, 244, 0.3);
-    transform: translateY(-2px);
-}
-
-#btn-copy:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(66, 133, 244, 0.2);
-}
-
-/* 點擊波紋效果 */
-#btn-copy::after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10, 10);
-    opacity: 0;
-    transition: transform .5s, opacity 1s;
-}
-
-#btn-copy:active::after {
-    transform: scale(0, 0);
-    opacity: 0.3;
-    transition: 0s;
-}
-
-/* delete 按鈕樣式 */
-.delete-action {
-    background-color: #ff4d4d;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin-left: 5px;
+    padding: 20px;
+    line-height: 1.6;
 }
 
-.delete-action:hover {
-    background-color: #ff0000;
-    transform: scale(1.05);
-    transition: transform 0.2s ease;
-}
-
-/* 底部區域 */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 0.5vh 0;
+/* Main container */
+.redirect-container {
     width: 100%;
-    box-sizing: border-box;
-    margin-top: auto;
+    max-width: 600px;
+    background: rgba(248, 249, 250, 0.95);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-bottom {
-    font-size: 0.9em;
-    padding: 1vh 0;
+/* Button text styles */
+
+/* Message section */
+.message-section {
+    margin-bottom: 40px;
 }
 
-.footer-bottom a {
-    color: #00bfff;
+.thank-you-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2C2C2C;
+    margin-bottom: 20px;
+}
+
+.thank-you-message {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.app-benefits {
+    font-size: 1rem;
+    color: #333;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #E4A334;
+    text-align: left;
+    line-height: 1.8;
+}
+
+.app-benefits strong {
+    color: #E4A334;
+}
+
+/* Action section */
+.action-section {
+    margin-bottom: 20px;
+}
+
+.app-store-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #E4A334;
+    color: white;
     text-decoration: none;
-}
-
-.footer-bottom a:hover {
-    text-decoration: underline;
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-    .main-container {
-        width: 95vw;
-        padding: 1.5vh;
-    }
-    
-    .input-position, .input-action {
-        width: 70px;
-    }
-    
-    .input-card, .input-suit {
-        width: 50px;
-    }
-}
-
-/* iPhone 專用的優化 */
-@media (max-width: 480px) {
-    .main-container {
-        width: 100vw;
-        margin: 0;
-        padding: 16px 20px;
-        border-radius: 0;
-        border: none;
-    }
-    
-    h2 {
-        font-size: 18px;
-        margin-bottom: 12px;
-    }
-    
-    .action {
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 16px;
-    }
-    
-    input, select, button {
-        height: 48px;
-        font-size: 16px;
-        padding: 0 12px;
-        border-radius: 8px;
-    }
-    
-    /* 盲注資訊區 */
-    .blinds-info {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        margin-bottom: 2vh;
-        gap: 1vh;
-    }
-
-    .blinds-info h2 {
-        width: 100%;
-    }
-
-    .blinds-info select.input-blinds {
-        width: 100%;
-        margin-bottom: 1vh;
-    }
-
-    .blinds-inputs-row {
-        display: flex;
-        width: 100%;
-        gap: 8px;
-    }
-    
-    .blinds-inputs-row .input-blinds {
-        flex: 1;
-        width: calc(25% - 6px);
-    }
-    
-    /* 卡片選擇器 */
-    .container-cards-input {
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .input-card, .input-suit {
-        width: 60px;
-        margin-bottom: 8px;
-    }
-    
-    /* 確保足夠的點擊區域 */
-    .btn-add-action, .btn-add-opponent, .delete-action {
-        width: 44px;
-        height: 44px;
-        line-height: 44px;
-        font-size: 22px;
-    }
-    
-    /* 加大輸出區域和複製按鈕 */
-    #output-text {
-        height: 24vh;
-        font-size: 16px;
-        padding: 12px;
-    }
-    
-    #btn-copy {
-        height: 54px;
-        width: 140px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    
-    /* 優化 Hero 區域 */
-    .hero-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .hero-row {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .hero-cards {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .hero-info > * {
-        margin-bottom: 8px;
-    }
-    
-    /* 優化下拉菜單和輸入框 */
-    select {
-        -webkit-appearance: none;
-        background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-        background-repeat: no-repeat;
-        background-position: right 8px center;
-        background-size: 16px;
-        padding-right: 30px;
-    }
-}
-
-/* 專為 iPhone 14 Pro Max 尺寸優化 */
-@media only screen and (device-width: 430px) and (device-height: 932px),
-       only screen and (max-width: 430px) {
-    .main-container {
-        padding: 20px 24px;
-        margin: 8px;
-        width: calc(100vw - 16px);
-        border-radius: 12px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    
-    /* 遊戲信息區域樣式優化 */
-    .blinds-info {
-        background-color: #f8f9fa;
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        border-left: 4px solid #cccccc;
-    }
-    
-    /* Hero 區域優化 */
-    .hero-info {
-        background-color: #f8f9fa;
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        border-left: 4px solid #cccccc;
-    }
-    
-    /* Hero 位置和籌碼量布局優化 */
-    .hero-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 12px;
-    }
-    
-    .hero-row .input-position {
-        flex: 0.35;
-        min-width: 100px;
-    }
-    
-    .hero-row .input-hero-stack {
-        flex: 0.65;
-        min-width: 150px;
-    }
-    
-    /* Hero 卡牌布局優化 */
-    .hero-cards {
-        display: flex;
-        justify-content: flex-start;
-        gap: 2px;
-        padding: 0;
-    }
-    
-    /* 修改卡片選擇器的大小和樣式 */
-    .input-card, .input-suit {
-        width: auto;
-        min-width: 45px;
-        max-width: none;
-        padding: 0 6px;
-        font-size: 15px;
-    }
-    
-    .input-position {
-        width: 90px;
-    }
-    
-    .input-action {
-        width: 100px;
-    }
-    
-    .input-amount {
-        flex: 1;
-        min-width: 90px;
-    }
-    
-    /* 改進遊戲階段區域 */
-    .stage {
-        padding: 16px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
-        border-left: 4px solid #007bff;
-    }
-    
-    /* 將每個階段用不同顏色區分 */
-    .stage.preflop {
-        border-left-color: #28a745;
-    }
-    
-    .stage.flop {
-        border-left-color: #fd7e14;
-    }
-    
-    .stage.turn {
-        border-left-color: #6610f2;
-    }
-    
-    .stage.river {
-        border-left-color: #e83e8c;
-    }
-    
-    /* 優化對手區域 */
-    .section-opponents {
-        background-color: #f8f9fa;
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        position: relative;
-    }
-    
-    .btn-add-opponent {
-        position: absolute;
-        right: 16px;
-        top: 16px;
-        background-color: #20c997;
-    }
-    
-    /* 輸出區域的優化 */
-    .section-output {
-        background-color: #f8f9fa;
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    
-    /* 優化 Flop, Turn, River 的卡片輸入 */
-    .container-cards-input {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: flex-start;
-        padding: 10px;
-        margin-bottom: 15px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    /* 每對卡片-花色的外層容器 */
-    .card-pair {
-        width: auto;
-        display: inline-flex;
-        flex-shrink: 0;
-        align-items: center;
-    }
-    
-    /* 調整卡片大小以適應螢幕，並隱藏下拉箭頭 */
-    .flop .input-card,
-    .flop .input-suit,
-    .turn .input-card,
-    .turn .input-suit,
-    .river .input-card,
-    .river .input-suit {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-image: none;
-        width: auto;
-        min-width: 45px;
-        max-width: none;
-        padding: 0 6px;
-        font-size: 15px;
-    }
-    
-    /* 處理超窄屏幕 */
-    @media (max-width: 375px) {
-        .flop .input-card,
-        .flop .input-suit,
-        .turn .input-card,
-        .turn .input-suit,
-        .river .input-card,
-        .river .input-suit {
-            min-width: 40px;
-            padding: 0 4px;
-            font-size: 14px;
-        }
-    }
-    
-    /* 花色選擇器的特殊處理，使其與卡片緊密相連 */
-    .hero-cards .input-suit,
-    .opponent-cards .input-suit,
-    .container-cards-input .input-suit {
-        margin-left: -4px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-left: none;
-        width: auto;
-        min-width: 40px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-image: none;
-    }
-    
-    /* 卡片選擇器的特殊處理，使其與花色緊密相連 */
-    .hero-cards .input-card,
-    .opponent-cards .input-card,
-    .container-cards-input .input-card {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        width: auto;
-        min-width: 40px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-image: none;
-    }
-    
-    /* 各階段標題和按鈕佈局 */
-    .stage h2 {
-        margin-bottom: 16px;
-        font-size: 20px;
-        color: #333;
-        font-weight: bold;
-        display: inline-block;
-    }
-    
-    /* 優化按鈕位置和大小 */
-    .btn-add-action, .btn-add-opponent {
-        width: 44px;
-        height: 44px;
-        line-height: 44px;
-        font-size: 24px;
-        position: absolute;
-        right: 16px;
-        top: 10px;
-        margin: 0;
-        transition: all 0.2s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    }
-    
-    .btn-add-action:active, .btn-add-opponent:active {
-        transform: scale(0.95);
-        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-    
-    .delete-action {
-        width: 36px;
-        height: 36px;
-        font-size: 18px;
-        position: absolute;
-        right: 5px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0;
-        transition: all 0.2s ease;
-    }
-    
-    .delete-action:active {
-        transform: translateY(-50%) scale(0.95);
-        background-color: #d9534f;
-    }
-    
-    /* 調整行動元素布局 */
-    .action {
-        padding: 12px 48px 12px 12px;
-        margin-bottom: 12px;
-        flex-wrap: wrap;
-        gap: 10px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        transition: all 0.2s ease;
-        position: relative;
-    }
-    
-    /* 使各階段之間的過渡更加明顯 */
-    .stage:not(.active) {
-        opacity: 0.7;
-        pointer-events: none;
-    }
-    
-    .stage.active {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    
-    /* 改進覆制按鈕樣式 */
-    #btn-copy {
-        background-color: #28a745;
-        margin-top: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: all 0.2s ease;
-    }
-    
-    #btn-copy:active {
-        transform: scale(0.97);
-        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-    
-    /* 針對撲克牌風格的元素 */
-    .hero-cards, .opponent-cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 8px 0;
-    }
-
-    /* 當屏幕足夠寬時，讓卡片平均分布 */
-    @media (min-width: 400px) {
-        .flop .container-cards-input {
-            justify-content: space-around;
-        }
-        
-        .flop .card-pair {
-            flex: 0 1 auto;
-        }
-    }
-    
-    /* 確保選擇器在點擊時不顯示外邊框 */
-    select:focus {
-        outline: none;
-    }
-}
-
-/* 動畫和過渡效果 */
-.newly-added {
-    animation: highlight-new 1s ease;
-}
-
-@keyframes highlight-new {
-    0% { background-color: rgba(0, 123, 255, 0.2); }
-    100% { background-color: #fff; }
-}
-
-/* 修改對手區域的樣式 */
-.opponent-cards {
-    display: flex;
-    gap: 2px;
-    flex-wrap: wrap;
-    align-items: center;
-    height: 44px;
-}
-
-.section-opponents h2 {
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.container-opponents .action {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 48px 12px 12px;
-}
-
-.container-opponents .input-position {
-    height: 44px;
-    flex: 0 0 auto;
-    min-width: 90px;
-}
-
-/* 對手區域的卡片樣式 */
-.container-opponents .card-pair {
-    height: 44px;
-    display: inline-flex;
-    align-items: center;
-}
-
-/* 改善各遊戲階段的視覺層次 */
-.gameplay-stages {
+    padding: 18px 28px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(184, 148, 31, 0.5);
     position: relative;
-}
-
-/* 修改對手卡片樣式，與Hero卡片保持一致 */
-.opponent-cards .input-suit {
-    margin-left: -4px !important;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: none;
-}
-
-.opponent-cards .input-card {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-/* 波紋效果 */
-.btn-ripple {
-    position: relative;
-}
-
-.btn-ripple::before {
-    content: "";
-    position: absolute;
-    top: var(--ripple-y, 50%);
-    left: var(--ripple-x, 50%);
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: none;
-    animation: ripple 0.6s ease-out;
-}
-
-@keyframes ripple {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.5;
-    }
-    100% {
-        width: 200%;
-        height: 200%;
-        opacity: 0;
-    }
-}
-
-/* 調整卡片對的佈局，移除陰影 */
-.card-pair {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    margin: 0;
-    border-radius: 8px;
     overflow: hidden;
-    box-shadow: none;
+    margin-bottom: 10px;
+    gap: 16px;
+    min-height: 68px;
 }
 
-/* 移除容器的陰影效果 */
-.container-cards-input {
-    box-shadow: none;
-    border: none;
+.button-logo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
 }
 
-/* 統一移除所有可能的陰影效果 */
-.flop .card-pair, 
-.turn .card-pair, 
-.river .card-pair,
-.hero-cards .card-pair {
-    box-shadow: none;
-}
-
-.flop .container-cards-input,
-.turn .container-cards-input,
-.river .container-cards-input {
-    background-color: transparent;
-    box-shadow: none;
-}
-
-/* 處理Flop區域，使其卡片靠左顯示 */
-.flop .container-cards-input {
-    justify-content: flex-start !important;
-    padding-left: 15px;
-}
-
-.turn .container-cards-input,
-.river .container-cards-input {
-    padding-left: 15px; 
-}
-
-/* 設置所有卡片容器靠左對齊 */
-.container-cards-input {
-    justify-content: flex-start !important;
+.button-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
 }
 
-@media only screen and (max-width: 430px) {
-    .hero-row .input-position {
-        flex: 0.3;
-        min-width: 90px;
+.app-store-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(139, 111, 21, 0.6);
+    background: #B8941F;
+}
+
+.app-store-button:hover .button-logo {
+    opacity: 1;
+}
+
+.app-store-button:active {
+    transform: translateY(0);
+}
+
+.button-text {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.button-subtitle {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+    line-height: 1.2;
+}
+
+.additional-info {
+    font-size: 0.95rem;
+    color: #444;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Developer info */
+.developer-info {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #444;
+}
+
+.developer-info p {
+    font-size: 0.9rem;
+    color: #999;
+    line-height: 1.6;
+}
+
+.developer-info a {
+    color: #E4A334;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.developer-info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .redirect-container {
+        margin: 20px;
+        padding: 30px 25px;
+        border-radius: 15px;
     }
-    
-    .hero-row .input-hero-stack {
-        flex: 0.7;
+
+    .app-title {
+        font-size: 2rem;
+    }
+
+    .thank-you-title {
+        font-size: 1.5rem;
+    }
+
+    .thank-you-message,
+    .app-benefits {
+        font-size: 1rem;
+    }
+
+    .app-store-button {
+        padding: 16px 22px;
+        font-size: 1rem;
+        gap: 14px;
+    }
+
+    .button-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .button-text {
+        font-size: 0.95rem;
+    }
+
+    .button-subtitle {
+        font-size: 0.8rem;
     }
 }
 
-.opponent-cards .input-card,
-.opponent-cards .input-suit {
-    height: 44px;
-    margin: 0;
+@media (max-width: 768px) {
+    .app-store-button {
+        padding: 16px 22px;
+        gap: 12px;
+        min-height: 64px;
+    }
+
+    .button-logo {
+        width: 36px;
+        height: 36px;
+    }
 }
 
-.container-opponents .action {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 48px 12px 12px;
+@media (max-width: 480px) {
+    .redirect-container {
+        margin: 10px;
+        padding: 25px 20px;
+    }
+
+    .app-store-button {
+        padding: 14px 20px;
+        gap: 12px;
+        min-height: 60px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .button-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .button-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .thank-you-title {
+        font-size: 1.3rem;
+    }
+
+    .app-store-button {
+        padding: 12px 30px;
+        font-size: 0.95rem;
+    }
+
+    .button-text {
+        font-size: 0.9rem;
+    }
+
+    .button-subtitle {
+        font-size: 0.8rem;
+    }
+}
+
+/* Animation for smooth entrance */
+.redirect-content {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add subtle animations to interactive elements */
+.app-store-button {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 8px 20px rgba(184, 148, 31, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 20px rgba(184, 148, 31, 0.6);
+    }
+    100% {
+        box-shadow: 0 8px 20px rgba(184, 148, 31, 0.4);
+    }
+}
+
+/* Remove the pulse animation on hover to prevent conflicts */
+.app-store-button:hover {
+    animation: none;
 }
