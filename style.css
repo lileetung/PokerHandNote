@@ -18,7 +18,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 30px 20px;
     line-height: 1.6;
 }
 
@@ -28,7 +28,7 @@ body {
     max-width: 600px;
     background: rgba(248, 249, 250, 0.95);
     border-radius: 20px;
-    padding: 40px 30px;
+    padding: 40px 30px 50px 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     text-align: center;
     backdrop-filter: blur(10px);
@@ -173,9 +173,13 @@ body {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    body {
+        padding: 25px;
+    }
+
     .redirect-container {
-        margin: 20px;
-        padding: 30px 25px;
+        margin: 20px 0;
+        padding: 30px 25px 40px 25px;
         border-radius: 15px;
     }
 
@@ -226,22 +230,26 @@ body {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 30px 20px;
+    }
+
     .redirect-container {
-        margin: 10px;
-        padding: 25px 20px;
+        margin: 20px 0;
+        padding: 30px 20px;
     }
 
     .app-store-button {
-        padding: 14px 20px;
+        padding: 16px 22px;
         gap: 12px;
-        min-height: 60px;
+        min-height: 68px;
         flex-direction: column;
         text-align: center;
     }
 
     .button-logo {
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
     }
 
     .button-content {
@@ -249,13 +257,29 @@ body {
         text-align: center;
     }
 
+    body {
+        padding: 40px 15px;
+    }
+
+    .redirect-container {
+        margin: 25px 0;
+        padding: 25px 18px 35px 18px;
+    }
+
     .thank-you-title {
         font-size: 1.3rem;
     }
 
     .app-store-button {
-        padding: 12px 30px;
+        padding: 14px 24px;
+        gap: 14px;
+        min-height: 72px;
         font-size: 0.95rem;
+    }
+
+    .button-logo {
+        width: 42px;
+        height: 42px;
     }
 
     .button-text {
